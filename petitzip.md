@@ -2,7 +2,7 @@
 
 22 McbeEringi
 
-// <https://qiita.com/McbeEringi/items/5acc1f940ff7504f7e16>の修正兼詳細版
+この記事は<https://qiita.com/McbeEringi/items/5acc1f940ff7504f7e16>の詳細版です。
 
 ---
 
@@ -457,7 +457,9 @@ await[...Array(8)].reduce(async(a,_,i)=>(
 `pre ${i}`が順番に表示された後、ランダムな順で`core ${i}`が表示されながら、`post ${i} ${a}`が順番に表示されたと思う。
 非同期処理の並列実行とその前後の処理を一つの`reduce`で実現している。
 
-## 結果
+## 完成品
+
+今回作成したコードはPetitZipの名称で<https://github.com/McbeEringi/petit/blob/main/zip.mjs>にて公開している。
 
 ```js
 const
@@ -481,12 +483,13 @@ zip=(
 )=>w.reduce(async(a,x,b,n)=>(
   b=x.buffer||x,
   n=te.encode(x.name),
-  x=[// vReq flag cpsType date CRC32 cpsSize rawSize nameLength extLength
+  x=[
     vz,zz,zz,le4(ddt(new Date(x.lastModified))),le4(crc(u(b instanceof ArrayBuffer?b:await new Response(b).arrayBuffer()))),
     x=le4(b.byteLength||b.size),x,le2(n.byteLength),zz
   ],
-  f(++i/w.length),// 進捗表示
+  f(++i/w.length/2),// 進捗表示
   a=await a,
+  f(++i/w.length/2),// 進捗表示
   a.cd.push(pk12,vz,...x,zz,zz,zz,zz,zz,cnt(a.lf),n),// PK0102 vMade x cmtLength 0304disk intAttr extAttrLSB extAttrMSB 0304pos name
   a.lf.push(pk34,...x,n,b),//  PK0304 x name content
   a
@@ -499,7 +502,75 @@ zip=(
 )))();
 ```
 
-Minifierに通すと1000Bを切る。
+## JSZipと比較
+
+作成したコードの評価のため、広く使われているZIP生成ライブラリであるJSZipと比較する。
+
+### サイズ
+
+機能が大きく異なるので単純比較はできないが、
+Minify済みのコードにおいてJSZipの902.2kBに対して、PetitZipは1.72kB、
+zip関数のみであれば1000Bを切る。
+
+### 性能
+
+私のGitHubにて公開している幾つかのリポジトリを用いてベンチマークを行った。
+検証に用いたコードは以下の通りである。
+
+```html
+<input type="file" id="zipinp" class="zab" webkitdirectory> <button id="zipbtn" class="zab bgca">run</button>
+<progress id="zipbar" max="1" value="0"></progress>
+<script src="https://cdn.jsdelivr.net/npm/jszip/dist/jszip.min.js"></script>
+<script type="module">
+  import{zip,dl}from'./zip.mjs';
+  zipbtn.onclick=async _=>(
+    console.log(
+      _=performance.now(),'petitzip',
+      await zip(
+        [...zipinp.files].map(x=>new File([x],x.webkitRelativePath,x)),
+        x=>zipbar.value=x
+      ),
+      performance.now()-_
+    ),
+    console.log(
+      _=performance.now(),'jszip',
+      await[...zipinp.files].reduce((a,x)=>a.file(x.webkitRelativePath,x),new JSZip()).generateAsync({type:"blob"},x=>zipbar.value=x.percent/100),
+      performance.now()-_
+    )
+  );
+</script>
+```
+
+- McbeEringi/petit 260,909 B ( 77 entries )
+  - petitzip 80 ms
+  - jszip 75 ms
+- McbeEringi/avr-musicbox 754,980 B ( 173 entries )
+  - petitzip 144 ms
+  - jszip 194 ms
+- McbeEringi/3dp-stuff 21,515,513  B ( 83 entries )
+  - petitzip 285 ms
+  - jszip 353 ms
+- McbeEringi/mcbeeringi.github.io 511,867,206  B ( 588 entries )
+  - petitzip 4108 ms
+  - jszip 6585 ms
+- mixed 719,815,077 B ( 2346 entries )
+  - petitzip 8282 ms
+  - jszip 10682 ms
+
+ほとんどの場合でPetitZipの方が高速である。
+Workerスレッドの使用などさらなる性能向上の余地も残っている。
+
+## 結論
+
+目標は十分に達成された。
+
+- ✅複数ファイルの一括ダウンロード
+  - ✅ 汎用 シンプル
+  - ✅ 軽量 1kB
+  - ✅ 爆速 ほとんどの場合においてJSZipより高速
+
+PetitZip、使ってね。
+<https://github.com/McbeEringi/petit/blob/main/zip.mjs>
 
 ## 余談
 
@@ -541,6 +612,18 @@ ZIPファイルの始端と終端に任意のデータを付加することが�
 つまりファイルの始端又は終端に任意のデータを付加可能な形式であれば、理論上どんな形式でも自己解凍プログラムを作成可能である。
 
 ちなみに今回の延長で自己解凍HTML(非圧縮)を作ってみたが、場合によってZIP部が文書に表示されてしまっていまいちだった。
+
+### Blobのダウンロード
+
+`URL.createObjectURL(blob)`を用いて一時的なURLを作成する。
+
+```js
+const
+dl=({name:n,buffer:b})=>(a=>URL.revokeObjectURL(a.href=URL.createObjectURL(b instanceof Blob?b:new Blob([b])),a.download=n,a.click()))(document.createElement('a'));
+
+dl({name:'test.zip',buffer:await zip(files)});
+dl({name:'hello.txt',buffer:'Hello World!'});
+```
 
 ## 参考文献
 
