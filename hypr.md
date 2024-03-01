@@ -28,17 +28,31 @@ Intel N100はCeleronの系譜を踏むエントリークラスのCPUであり、
 LinuxはフリーなOSであるため、多数の派生OS = ディストリビューションが存在する。
 Arch Linuxはその中でも比較的新しく、軽量かつ柔軟、シンプルなディストリビューションである。
 統計によると2024年3月現在の工学研究部では約1/3程度の部員がArchLinuxを使用している(憶測)。
-最近のUbuntuやDebianはGUIによるインストールが一般的であるが、Arch Linuxのインストールではコマンドの操作が必須である。
+Arch Linuxのメリットとして例えば
+
+- Arch Linux Users Repositoryにほしいソフトウェアはだいたい揃っている
+- 最小限の機能のみであるため望まない機能を入れないことが容易
+- Linux界隈最大級のwiki、ArchWikiがあるため情報が豊富
+
+等が挙げられる。
 
 私はLinuxの経験が殆ど無く、触ったことがあるのは精々授業でのUbuntuと、iOSのエミュレータアプリ「iSH」で動くAlpine Linux程度であった。
+最近のUbuntuやDebianはGUIによるインストールが一般的であるが、Arch Linuxのインストールではコマンドの操作が必須である。
 しかしArch LinuxにはLinux界隈でも最大規模のWiki、ArchWikiがついているのでこれを参考にインストールを進めた。
 今回はWindows11とArch Linuxのデュアルブート環境を構築した。
 
-Arch Linux本体のインストールについては多数の解説が存在するのでここでは割愛する。
+Arch Linux本体のインストールについては多数の解説が存在するのでここでは割愛、要点のみまとめる。
 
-割愛しないかも。
-
-ｺﾞﾆｮｺﾞﾆｮ
+- パーティション
+	- nvme0n1p1 EFI 100M
+	- nvme0n1p2 Windows 予約領域 128M
+	- nvme0n1p3 Windows root 125G
+	- nvme0n1p4 Linux EFI  550M systemd-boot
+	- nvme0n1p5 Linux swap 16G ext4
+	- nvme0n1p6 Linux root 333.5G
+	- nvme0n1p7 Window回復領域 1.7G
+- 無線: iwd + systemd-resolved
+- AUR: yay
 
 ## デスクトップ環境? ウィンドウマネージャ??
 
@@ -76,6 +90,10 @@ HyprlandはWaylandで動くタイル型のウィンドウマネージャであ�
 同じくWayland対応のタイル型ウィンドウマネージャであるswayに対して特に視覚効果が豪華である。
 初めてMacを触ったときと似たような感動が味わえる。
 
+
+- タイル型としては視覚効果が豪華
+	-
+- 設定ファイルが理解しやすい
 
 タイル型は
 キーバインドを覚えなきゃ→トラックパッドユーザーでも超快適
