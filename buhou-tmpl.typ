@@ -2,8 +2,8 @@
   no:"XX",
   title:"部報サンプル",author:"工研太郎",brief:"Hello from typst!",
   serif:"Noto Serif CJK JP",
-  sansserif:"Noto Sans CJK JP",
-  monospace:("Monaspace Argon","Cascadia Mono"),
+  sansserif:("Noto Sans CJK JP","Noto Sans JP"),
+  monospace:("Monaspace Argon","Courier New"),
   body
 )={
   set page(
