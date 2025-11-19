@@ -3,7 +3,7 @@
   title:"部報サンプル",author:"工研太郎",brief:"Hello from typst!",
   serif:"Noto Serif CJK JP",
   sansserif:"Noto Sans CJK JP",
-  monospace:"Monaspace Argon",
+  monospace:("Monaspace Argon","Cascadia Mono"),
   body
 )={
   set page(
