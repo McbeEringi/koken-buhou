@@ -1,7 +1,7 @@
 #!/bin/env -S typst watch
-#import "buhou-tmpl.typ":*
+#import "buhou-tmpl.typ":main
 
-#main(
+#show:main.with(
   no:78,
   title:[7セグ8桁ディスプレイ製作記],
   author:[22 McbeEringi],
@@ -11,7 +11,7 @@
     そのままだと読み辛いので雰囲気損なわない程度に修正しました。
     #image("img/qr.png") #link("https://youtu.be/sqhlIasdUrg")
   ]
-)[
+)
 
 おはようございます。工研コンテスト当日朝10時半です。
 これをね、5分のね、動画にまとめなきゃいけないなって思ってます。
@@ -129,4 +129,3 @@ I2Cの親機、2色マトリクスの基板なんですけど、大体同じ回�
 多分ね、動画が5分に収まった。すごい。
 ではまた。
 
-]
