@@ -1,11 +1,6 @@
 #!/bin/env -S typst watch
-#import "buhou-tmpl.typ":main
-#import "@preview/zebra:0.1.0":qrcode
-#import "@preview/codly:1.3.0":*
-#import "@preview/codly-languages:0.1.10":*
-#show: codly-init.with()
-#codly(languages:codly-languages)
-#show raw.line:it=>{show regex("\S"):it=>sym.zws+it;it}
+#import "buhou-tmpl.typ":*
+// #show raw.line:it=>{show regex("\S"):it=>sym.zws+it;it}
 
 #show:main.with(
 	no:80,
@@ -35,8 +30,6 @@ caption:[新しいシーリングライトのリモコン]
 
 中央のボタンには「点灯 常夜灯 OFF」と書かれている。
 独立した常夜灯ボタンが存在しない。
-
-#colbreak()
 
 深夜に少し物を取りに行きたい場面を想像してほしい。
 常夜灯をつけたい。
@@ -190,21 +183,11 @@ LEDが基板から飛び出さない設計にした。
 LEDの下の銅箔を剥き出しにすることで手前側に赤外線が反射するようにした。
 ケースに収めることを前提に左右に余白を設け、裏面はなるべく配線を通さないようにした。
 
-#place(
-	auto,
-	scope:"parent",
-	float:true,
-	figure(
-		image("4btn.png"),
-		caption:[PCBリモコンの設計]
-	)
-)
-
-
 #figure(
-qrcode("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/4btn"),
-caption:[https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/4btn]
+	image("4btn.png"),
+	caption:[PCBリモコンの設計]
 )
+#url("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/4btn"),
 
 === 検証
 回路やソフトウェア自体は問題なく動作した。
@@ -252,19 +235,11 @@ LEDだけを表側に配置し、その他の部品は壁スイッチ内部の�
 固定用のM3のネジ穴も念のため用意した。
 
 
-#place(
-	auto,
-	scope:"parent",
-	float:true,
-	figure(
-		image("wall.png"),
-		caption:[壁スイッチリモコンの設計]
-	)
-)
 #figure(
-qrcode("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/cosmo_wide21"),
-caption:[https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/cosmo_wide21]
+	image("wall.png"),
+	caption:[壁スイッチリモコンの設計]
 )
+#url("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/cosmo_wide21")
 
 === 検証
 
@@ -273,6 +248,8 @@ caption:[https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/cosmo_
 
 壁スイッチをカバーしつつリモコンとして動作させる目的は達成された。
 うっかり壁スイッチを操作してもこれで大丈夫。
+
+電池持ちについては全く切れる気配がなく、かなり長期間使うことができそうである。
 
 #figure(
 image("wall.jpg"),
@@ -285,10 +262,8 @@ caption:[裏面の部品]
 
 = ソフトウェア
 成果物はこちら。
-#figure(
-	qrcode("https://github.com/McbeEringi/avr-stuff/tree/main/ir_remote"),
-	caption:[https://github.com/McbeEringi/avr-stuff/tree/main/ir_remote]
-)
+#url("https://github.com/McbeEringi/avr-stuff/tree/main/ir_remote"),
+
 == まずは動くものを
 まずは純正リモコンの信号をArduino IRRemoteで読み取ることから始めた。
 すぐにNECフォーマットであること、データ本体は8bitであることが分かった。
@@ -498,7 +473,7 @@ static const uint8_t send_sony(
 		else if(x&(1<<7))send_nec(nec_re_dim);//send_aeha(pana_hk_dim,40);
 		else if(x&(1<<1))send_nec(nec_re_off);//send_aeha(pana_hk_off,40);
 		else if(x&(1<<2))send_nec(nec_re_lumi);//send_aeha(pana_hk_off,40);
-		// {send_nec(code_g);FOR(150)wait();FOR(4)FORBUF(send_sony(code_e,12))wait();}//send_aeha(code_f,64);
+		// {send_nec(code_g);FOR(150)wait(); FOR(4)FORBUF(send_sony(code_e,12))wait();}//send_aeha(code_f,64);
 	}
 ```
 
@@ -507,6 +482,12 @@ static const uint8_t send_sony(
 
 = 結果と今後
 
+製品付属のリモコンに不満を抱き、いくつかの試作を重ねて実用的な赤外線リモコンを作ることができた。
+主要なフォーマットに全て対応すると同時に、ATTiny202の2kBのフラッシュに収めることができた。
+PCBの設計では部品実装時でも 25mm \* 50mm \* 6mm のサイズに収めることができた。
+壁スイッチを見た目を維持しながらリモコンに置き換えることができた。
+
+部品配置を工夫し、LEDを指で隠してしまう問題を解消したい。
 記事を書きながら、LED1発ならFETは必要無いのでは、と思い始めたので次はこれも検証したい。
 
 = 余談
