@@ -187,7 +187,7 @@ LEDの下の銅箔を剥き出しにすることで手前側に赤外線が反�
 	image("4btn.png"),
 	caption:[PCBリモコンの設計]
 )
-#url("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/4btn"),
+#qr("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/4btn"),
 
 === 検証
 回路やソフトウェア自体は問題なく動作した。
@@ -239,7 +239,7 @@ LEDだけを表側に配置し、その他の部品は壁スイッチ内部の�
 	image("wall.png"),
 	caption:[壁スイッチリモコンの設計]
 )
-#url("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/cosmo_wide21")
+#qr("https://github.com/McbeEringi/pcb-stuff/tree/main/proj/ir_remote/cosmo_wide21")
 
 === 検証
 
@@ -262,7 +262,7 @@ caption:[裏面の部品]
 
 = ソフトウェア
 成果物はこちら。
-#url("https://github.com/McbeEringi/avr-stuff/tree/main/ir_remote"),
+#qr("https://github.com/McbeEringi/avr-stuff/tree/main/ir_remote"),
 
 == まずは動くものを
 まずは純正リモコンの信号をArduino IRRemoteで読み取ることから始めた。

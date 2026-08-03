@@ -31,27 +31,25 @@
   set par(first-line-indent:(amount:1em,all:true))
   set text(
     lang:"ja",region:"jp",
-    font:serif,weight:"regular",size:12pt
+    font:serif,size:12pt
   )
   set heading(numbering:"1.1  ")
-  show heading:set text(font:sansserif,weight:"medium")
-  // show heading.where(level:1):x=>text(size:13pt,x)
-  // show heading.where(level:2):x=>text(size:12pt,x)
+  show heading:set text(font:sansserif)
   show link:set text(font:monospace,size:9pt)
   show raw:set text(font:monospace)
 
   v(2em)
   align(center)[
-    #text(size:20pt,font:sansserif,title)#v(1em)
-    #text(size:14pt,font:sansserif,author)#v(1em)
-    #box(inset:(x:2em),text(size:10pt,brief))#v(1em)
-    #line()
+    #text(size:20pt,font:sansserif)[title]#v(1em)
+    #text(size:14pt,font:sansserif)[author]#v(1em)
+    #text(size:10pt)[brief]#v(1em)
+    #line()#v(1em)
   ]
   // show:columns.with(2)
   body
 }
 
-#let url(
+#let qr(
   url
 )={
   figure(qrcode(url),caption:[#link(url)])
