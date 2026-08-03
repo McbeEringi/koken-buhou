@@ -1,0 +1,1 @@
+../buhou-tmpl.typ
