@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 96 96" background-color="#ccc">
+	<desc>ueckoken logo square</desc>
+	<defs>
+		<path id="bg" d="M6,6v20h20v-20z"/>
+		<path id="bg_" stroke="none" d="M0,0v32h32v-32z"/>
+		<path
+			id="main"
+			fill="none"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			d="
+			M6,6
+			m-2,7l11-2.75
+			m-3,.75v5
+			m-4,1l11-2.75m1-.25l4-1
+			m-4,4l8-2
+			m-11,5.75l2-.5v-3l-2,.5v4.25
+			m6-8.75v14.75
+		
+			M6,6m5,10m5.875-1.219a6,6,0,0,1-1.875,5.691
+			M6,6m5,10m9.757-2.189a10,10,0,0,1-1.097,7.189
+			"
+		/>
+		<pattern id="g1" width="3.125%" height="3.125%">
+			<path stroke-width="0.1" stroke="#fff1" fill="#036" d="M0,0v1h1v-1z"/>
+		</pattern>
+		<pattern id="g2" width="12.5%" height="12.5%" x="6.25%" y="6.25%">
+			<path stroke-width="0.1" stroke="#fff1" fill="none" d="M0,0v4h4v-4z"/>
+		</pattern>
+	</defs>
+
+	<a href=""   transform="translate( 0, 0)"><use href="#bg" fill="#fff"/><use href="#main" stroke="#f12"/></a>
+	<view id="!" viewBox="38 6 20 20"/>
+	<a href="#!" transform="translate(32, 0)"><use href="#bg" fill="#222"/><use href="#main" stroke="#f12"/></a>
+	<view id="_" viewBox="70 6 20 20"/>
+	<a href="#_" transform="translate(64, 0)"><use href="#main" stroke="#f12"/></a>
+
+	<view id="-"  viewBox="6 38 20 20"/>
+	<a href="#-"  transform="translate( 0,32)"><use href="#bg" fill="#fff"/><use href="#main" stroke="#222"/></a>
+	<view id="-!" viewBox="38 38 20 20"/>
+	<a href="#-!" transform="translate(32,32)"><use href="#bg" fill="#222"/><use href="#main" stroke="#fff"/></a>
+	<view id="-_" viewBox="6 70 20 20"/>
+	<a href="#-_" transform="translate(0,64)"><use href="#main" stroke="#222"/></a>
+	<view id="-!_" viewBox="38 70 20 20"/>
+	<a href="#-!_" transform="translate(32,64)"><use href="#main" stroke="#fff"/></a>
+	
+	<view id="$" viewBox="0 0 96 96"/>
+	<view id="d" viewBox="64 64 32 32"/>
+	<a
+			href="#d" transform="translate(64,64)"
+			fill="none" stroke="#fff6"
+			stroke-width=".2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+	>
+		<use href="#bg_" fill="url(#g1)"/>
+		<use href="#bg_" fill="url(#g2)"/>
+		<g  stroke-width=".2">
+			<use href="#bg"/>
+			<path d="M16,6a10,10,0,1,0,1e-6,0z"/>
+		</g>
+		<use href="#main" stroke-width="1"/>
+		<path
+			stroke="#fff9"
+			d="
+				M0,14l32-8
+				M0,19l32-8
+				M0,22l32-8
+				M0,25l32-8
+				M12,8v10
+				M15,8v16
+				M17,16v8
+				M19,12v12
+				M23,12v20
+				M18,21h3
+				M11,16m.5,0a.5,.5,0,1,0,0,1e-5
+				M11,16m6,0a6,6,0,1,0,0,1e-5
+				M11,16m10,0a10,10,0,1,0,0,1e-5
+			"
+		/>
+	</a>
+</svg>

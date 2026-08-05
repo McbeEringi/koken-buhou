@@ -40,9 +40,9 @@
 
   v(2em)
   align(center)[
-    #text(size:20pt,font:sansserif)[title]#v(1em)
-    #text(size:14pt,font:sansserif)[author]#v(1em)
-    #text(size:10pt)[brief]#v(1em)
+    #text(size:20pt,font:sansserif)[#title]#v(1em)
+    #text(size:14pt,font:sansserif)[#author]#v(1em)
+    #text(size:10pt)[#brief]#v(1em)
     #line()#v(1em)
   ]
   // show:columns.with(2)
