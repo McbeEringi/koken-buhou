@@ -1,7 +1,7 @@
 ---
 marp: true
 # header: 'header text'
-footer: '![height:56](https://mcbeeringi.dev/img/icon.svg#!_)'
+footer: '![height:56](https://6ca.me/img/icon.svg#!_)'
 theme: gaia
 class: invert
 ---
